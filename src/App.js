@@ -6,6 +6,32 @@ function App() {
     <div className="app">
       <div className='calculatorBody'>
        <Button className="" style={{minWidth:"60px"}}>1</Button>
+       <Button className="" style={{minWidth:"60px"}}>1</Button>
+       <Button className="" style={{minWidth:"60px"}}>1</Button>
+       <Button className="" style={{minWidth:"60px"}}>1</Button>
+       <Button className="" style={{minWidth:"60px"}}>1</Button>
+       <Button className="" style={{minWidth:"60px"}}>1</Button>
+       <Button className="" style={{minWidth:"60px"}}>1</Button>
+       <Button className="" style={{minWidth:"60px"}}>1</Button>
+       <Button className="" style={{minWidth:"60px"}}>1</Button>
+       <Button className="" style={{minWidth:"60px"}}>1</Button>
+       <Button className="" style={{minWidth:"60px"}}>1</Button>
+       <Button className="" style={{minWidth:"60px"}}>1</Button>
+       <Button className="" style={{minWidth:"60px"}}>1</Button>
+       <Button className="" style={{minWidth:"60px"}}>1</Button>
+       <Button className="" style={{minWidth:"60px"}}>1</Button>
+       <Button className="" style={{minWidth:"60px"}}>1</Button>
+       <Button className="" style={{minWidth:"60px"}}>1</Button>
+       <Button className="" style={{minWidth:"60px"}}>1</Button>
+       <Button className="" style={{minWidth:"60px"}}>1</Button>
+       <Button className="" style={{minWidth:"60px"}}>1</Button>
+       <Button className="" style={{minWidth:"60px"}}>1</Button>
+       <Button className="" style={{minWidth:"60px"}}>1</Button>
+       <Button className="" style={{minWidth:"60px"}}>1</Button>
+       <Button className="" style={{minWidth:"60px"}}>1</Button>
+       <Button className="" style={{minWidth:"60px"}}>1</Button>
+       <Button className="" style={{minWidth:"60px"}}>1</Button>
+       <Button className="" style={{minWidth:"60px"}}>1</Button>
       </div>
     </div>
   );
