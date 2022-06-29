@@ -63,9 +63,10 @@ function App() {
       value:'=',
     },
   ])
-  const [currentInputs, setcurrentInputs] = useState([0])
   const [firstCount, setfirstCount] = useState([])
   const [secondCount, setsecondCount] = useState([])
+  const [result, setresult] = useState([0])
+  const [currentInputs, setcurrentInputs] = useState([0])
   const [swipe, setswipe] = useState(false)
   const handleButtons = (expression) =>{
     switch(expression) {
@@ -87,12 +88,20 @@ function App() {
         let result  = parseInt(firstCount.join("")) + parseInt(secondCount.join(""))
         setcurrentInputs([result])
         setfirstCount([result])
+        setresult(result)
         setsecondCount([])
         setswipe(false)
       break;  
       case '+':
         if(currentInputs[currentInputs.length-1]==='+') return;
         setcurrentInputs([...currentInputs,'+'])
+        if(swipe){
+          let result  = parseInt(firstCount.join("")) + parseInt(secondCount.join(""))
+          setfirstCount([result])
+          setresult(result)
+          setsecondCount([])
+          setswipe(false)
+        }
         setswipe(true)
       break;  
       case expression:
@@ -116,15 +125,13 @@ function App() {
       default:
         // code block 
     }
-
   }
-
   return (
     <div className="app">
       <div className='calculatorBody'>
         <div>
           <Stack>
-            <div className='calculator__first__display' >1</div>
+            <div className='calculator__first__display' >{result}</div>
             <div className='calculator__second__display'>{currentInputs}</div>
           </Stack>
         </div>
@@ -143,6 +150,7 @@ function App() {
 }
 
 export default App;
+
 
 const columnStyle = {
   padding:'5px',

@@ -19,10 +19,9 @@
     color: rgb(221, 221, 221);
     font-weight:bold;
     overflow:auto;
-    padding: 5px;
+    padding: 0px 15px;
     letter-spacing:1px;
     margin-top:100px;
-
 }
 .calculator__second__display{
     height:80px;
@@ -31,7 +30,7 @@
     color: white;
     font-weight:bold;
     overflow:auto;
-    padding: 5px;
+    padding: 0px 15px;
     letter-spacing:1px;
 }
 .calculator__second__display::-webkit-scrollbar{
