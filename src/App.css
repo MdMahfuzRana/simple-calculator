@@ -1,22 +1,27 @@
 
 .app{
-    height: 100vh;
-    width: 100vw;
+    min-height: 100vh;
+    width: 100%;
     display:flex;
     justify-content:center;
+    flex-direction: column;
     align-items:center;
+    background: #0052D4;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #6FB1FC, #4364F7, #0052D4);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #6FB1FC, #4364F7, #0052D4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
 }
 .calculatorBody{
     height: fit-content;
     width: 300px;
-    background-color:black;
-    border-radius: 15px;
+    background-color:white;
+    border-radius: 25px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .calculator__first__display{
     height:50px;
     font-size:24px;
-    direction: rtl;
-    color: rgb(221, 221, 221);
+    color: black;
     font-weight:bold;
     overflow:auto;
     padding: 0px 15px;
@@ -26,12 +31,12 @@
 .calculator__second__display{
     height:80px;
     font-size:30px;
-    direction: rtl;
-    color: white;
+    color: black;
     font-weight:bold;
     overflow:auto;
     padding: 0px 15px;
     letter-spacing:1px;
+    text-align: right;
 }
 .calculator__second__display::-webkit-scrollbar{
     display: none;
@@ -42,4 +47,13 @@
 }
 .btn{
     min-width: 100%;
+}
+
+
+.board{
+    height: 30px;
+    width: fit-content;
+    padding:10px;
+    color:white;
+    text-align:center;
 }

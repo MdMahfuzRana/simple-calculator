@@ -66,12 +66,53 @@ function App() {
   const [firstCount, setfirstCount] = useState([])
   const [secondCount, setsecondCount] = useState([])
   const [result, setresult] = useState([0])
-  const [currentInputs, setcurrentInputs] = useState([0])
+  const [currentInputs, setcurrentInputs] = useState([])
   const [swipe, setswipe] = useState(false)
+  const [operator, setoperator] = useState()
+  const [modulus, setmodulus] = useState(false)
+
+  const calculate = (right,left,operations)=>{
+    switch (operations) {
+      case '+':
+        return(right+left)
+      case '-':
+        return(right-left)    
+      case '/':
+        return(right/left)
+      case 'x':
+        return(right*left)          
+      default:
+        break;
+    }
+  }
+  const operations = (expression)=> {
+    ['+','-','/','x'].map(sign=>{
+      if(expression===sign){
+        if(firstCount.length===0){
+          setfirstCount([sign])
+          return setcurrentInputs([sign])
+        }
+        if(currentInputs[currentInputs.length-1]===sign) return;
+        setoperator(sign)
+        setcurrentInputs([...currentInputs,sign])
+        if(swipe){
+          let leftNbr = parseInt(firstCount.join(""))
+          let rightNbr = parseInt(secondCount.join(""))
+          let result  =  calculate(leftNbr, rightNbr, operator)
+          setfirstCount([result])
+          setresult(result)
+          setsecondCount([])
+          setswipe(false)
+        }
+        setswipe(true)
+      }
+    })
+  }
+
   const handleButtons = (expression) =>{
     switch(expression) {
       case 'AC':
-        setcurrentInputs([0])
+        setcurrentInputs([])
         setswipe(false)
         setfirstCount([])
         setsecondCount([])
@@ -80,30 +121,52 @@ function App() {
         currentInputs.splice(-1,1)
         setcurrentInputs([...currentInputs])
         if(currentInputs.length<1){
-          setcurrentInputs([0])
+          setcurrentInputs([])
         }
       break;
+      case '+':
+        operations('+')
+        break;
+      case '-':
+        operations('-')
+        break;
+      case '/':
+        operations('/')
+        break;
+      case 'x':
+        operations('x')
+        break;
+      case '%':
+        if(firstCount.length===0){return}
+        if(currentInputs[currentInputs.length-1]==='%') return
+        setfirstCount([...firstCount,'%'])
+        let divideable = parseFloat(firstCount.join(""))
+        let modulus =  calculate(divideable, 100, '/')
+        setcurrentInputs([modulus])
+        setfirstCount([modulus])
+        setresult(modulus)
+        setsecondCount([])
+        setswipe(false)
+        break;
+      case '.':
+        setcurrentInputs([...currentInputs,'.'])
+        if(swipe){
+          setsecondCount([...secondCount,'.'])
+        }else{
+          setfirstCount([...firstCount,'.'])
+        }
+        break;
       case '=':
-        if(!swipe)return;
-        let result  = parseInt(firstCount.join("")) + parseInt(secondCount.join(""))
+        if(secondCount?.length===0)return;
+        let leftNbr = parseFloat(firstCount.join(""))
+        let rightNbr = parseFloat(secondCount.join(""))
+        let result  =  calculate(leftNbr, rightNbr, operator)
         setcurrentInputs([result])
         setfirstCount([result])
         setresult(result)
         setsecondCount([])
         setswipe(false)
-      break;  
-      case '+':
-        if(currentInputs[currentInputs.length-1]==='+') return;
-        setcurrentInputs([...currentInputs,'+'])
-        if(swipe){
-          let result  = parseInt(firstCount.join("")) + parseInt(secondCount.join(""))
-          setfirstCount([result])
-          setresult(result)
-          setsecondCount([])
-          setswipe(false)
-        }
-        setswipe(true)
-      break;  
+      break; 
       case expression:
         [0,1,2,3,4,5,6,7,8,9].map(number=>{
           if(expression===number){
@@ -118,12 +181,8 @@ function App() {
             return;
           }
         })
-      break;
-      // case 'AC':
-      //   setcurrentInputs([0])
-      //   break;  
+      break; 
       default:
-        // code block 
     }
   }
   return (
@@ -132,18 +191,21 @@ function App() {
         <div>
           <Stack>
             <div className='calculator__first__display' >{result}</div>
-            <div className='calculator__second__display'>{currentInputs}</div>
+            <div className='calculator__second__display'>{currentInputs.length===0? 0:currentInputs}</div>
           </Stack>
         </div>
         <div className='calculator__buttons__container'>
         <Row style={rowStyle} className="row">
           {
             buttons?.map((button,index)=>(
-              <Col onClick={()=>{handleButtons(button?.value)}} key={index} xs={button.value === '='? 6:3} style={columnStyle} ><Button variant={button.value === '='? 'outline-success':'outline-primary'} className="btn" >{button?.value}</Button></Col>
+              <Col onClick={()=>{handleButtons(button?.value)}} key={index} xs={button.value === '='? 6:3} style={columnStyle} ><Button variant={button.value === '='? 'secondary':'primary'} className="btn" >{button?.value}</Button></Col>
             ))
           }
         </Row>
         </div>
+      </div>
+      <div className='board'>
+        <p>Designed and developed By Md Mahfuz Rana</p>
       </div>
     </div>
   );
